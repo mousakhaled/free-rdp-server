@@ -7,12 +7,14 @@ jobs:
     runs-on: windows-latest
     steps:
       - name: Download and set up ngrok
+        shell: pwsh
         run: |
           Invoke-WebRequest https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-stable-windows-amd64.zip -OutFile ngrok.zip
           Expand-Archive ngrok.zip -DestinationPath ngrok
           .\ngrok\ngrok.exe authtoken ${{ secrets.NGROK_TOKEN }}
 
       - name: Enable RDP
+        shell: pwsh
         run: |
           net user kamel123 MyStrong123 /add
           net localgroup administrators kamel123 /add
